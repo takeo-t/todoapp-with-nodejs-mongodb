@@ -3,6 +3,7 @@ const app = express();
 const taskRoutye = require("./routes/tasks");
 const connectDB = require("./db/connect");
 require("dotenv").config();
+app.use(express.json());
 
 const PORT = 5000;
 
