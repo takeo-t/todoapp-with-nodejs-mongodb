@@ -2,12 +2,18 @@
 const tasksDOM = document.querySelector(".tasks");
 const fromDOM = document.querySelector(".task-form");
 const taskInputDOM = document.querySelector(".task-input");
+const formAlertDOM = document.querySelector(".form-alert");
 // /api/v1/tasksからタスクを読み込む
 const showTasks = async () => {
     try {
         //　自作のAPIを呼び出す
         const { data: tasks } = await axios.get("/api/v1/tasks");
         console.log(tasks);
+        // タスクが１つもない時
+        if(tasks.length < 1) {
+            tasksDOM.innerHTML = `<h5 class="emoty-list">タスクがありません</h5>`
+            return;
+        }
 
         // タスクを出力
         const allTasks = tasks.map((task) => {
@@ -47,9 +53,18 @@ fromDOM.addEventListener("submit", async (event) => {
         });
         showTasks();
         taskInputDOM.value = "";
+        formAlertDOM.style.display = "block";
+        formAlertDOM.textContent = "タスクが追加されました";
+        formAlertDOM.classList.add("text-success");
     } catch (error) {
         console.log(error);
+        formAlertDOM.style.display = "block";
+        formAlertDOM.innerHTML = "無効です。もう一度やり直してください。";
     }
+    setTimeout(() => {
+        formAlertDOM.style.display = "none";
+        formAlertDOM.classList.remove("text-success");
+    }, 3000);
 });
 
 // タスクを削除する
