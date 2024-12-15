@@ -12,7 +12,7 @@ const getAllTasks = async (req, res) => {
 const createTask = async (req, res) => {
   try {
     const createTask = await Task.create(req.body);
-    res.status(201).json({ createTask });
+    res.status(201).json(createTask);
   } catch (error) {
     res.status(500).json({ msg: error });
   }
@@ -26,7 +26,7 @@ const getSingleTask = async (req, res) => {
       return res.status(404).json({ id: `${req.params.id}は存在しません` });
     }
 
-    res.status(201).json({ getSingleTask });
+    res.status(201).json(getSingleTask);
   } catch (error) {
     res.status(500).json({ msg: error });
   }
@@ -46,7 +46,7 @@ const updateTask = async (req, res) => {
       return res.status(404).json({ id: `${req.params.id}は存在しません` });
     }
 
-    res.status(201).json({ updateTask });
+    res.status(201).json(updateTask);
   } catch (error) {
     res.status(500).json({ msg: error });
   }
@@ -60,7 +60,7 @@ const deleteTask = async (req, res) => {
       return res.status(404).json({ id: `${req.params.id}は存在しません` });
     }
 
-    res.status(201).json({ deleteTask });
+    res.status(201).json(deleteTask);
   } catch (error) {
     res.status(500).json({ msg: error });
   }
